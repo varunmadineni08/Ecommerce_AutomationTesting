@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class HomePage:
 
     def __init__(self,driver):
@@ -18,6 +19,7 @@ class HomePage:
 
     def click_cart_box(self):
         self.driver.find_element(By.ID,self.cart_box_id).click()
+
 
     def cart_validation(self):
         return self.driver.find_element(By.CLASS_NAME,self.validation_cart).is_displayed()
