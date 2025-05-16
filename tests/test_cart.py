@@ -1,18 +1,13 @@
-from pages.Cartpage import CartPage
-from pages.Homepage import HomePage
+
 from pages.Loginpage import LoginPage
+from tests.Basetest import BaseTest
 
 
-class TestCart:
+class TestCart(BaseTest):
 
-    def test_cart_page(self,setup):
+    def test_cart_page(self):
         login_page=LoginPage(self.driver)
-        login_page.enter_username("standard_user")
-        login_page.enter_password("secret_sauce")
-        login_page.click_login_button()
-        home_page=HomePage(self.driver)
-        home_page.click_add_item__01()
-        home_page.click_add_item_02()
-        home_page.click_cart_box()
-        cart_page=CartPage(self.driver)
+        login_page.enter_details("standard_user","secret_sauce")
+        home_page=login_page.click_login_button()
+        cart_page=home_page.add_items() #here we added method from homepage
         cart_page.click_checkout_button()
