@@ -1,12 +1,15 @@
 from selenium.webdriver.common.by import By
 
-class CheckoutPage:
+from pages.Basepage import BasePage
+
+
+class CheckoutPage(BasePage):
 
     def __init__(self,driver):
-        self.driver=driver
+        super().__init__(driver)
 
-    firstname_id="first-name"
-    lastname_id="last-name"
+    first_id="first-name"
+    last_id="last-name"
     zipcode_id="postal-code"
     continue_button_id="continue"
     finish_button_id="finish"
@@ -14,28 +17,35 @@ class CheckoutPage:
     home_coming_class="app_logo"
 
     def enter_firstname(self,firstname):
-        self.driver.find_element(By.ID, self.firstname_id).clear()
-        self.driver.find_element(By.ID,self.firstname_id).send_keys(firstname)
+        # self.driver.find_element(By.ID, self.firstname_id).clear()
+        self.enter_text(firstname,"first_id",self.first_id)
+        # self.driver.find_element(By.ID,self.firstname_id).send_keys(firstname)
 
     def enter_lastname(self,lastname):
-        self.driver.find_element(By.ID, self.lastname_id).clear()
-        self.driver.find_element(By.ID,self.lastname_id).send_keys(lastname)
+        # self.driver.find_element(By.ID, self.lastname_id).clear()
+        self.enter_text(lastname,"last_id", self.last_id)
+        # self.driver.find_element(By.ID,self.lastname_id).send_keys(lastname)
 
     def enter_zipcode(self,zipcode):
         self.driver.find_element(By.ID,self.zipcode_id).clear()
-        self.driver.find_element(By.ID,self.zipcode_id).send_keys(zipcode)
+        self.enter_text(zipcode, "zipcode_id", self.zipcode_id)
+        # self.driver.find_element(By.ID,self.zipcode_id).send_keys(zipcode)
 
     def click_continue(self):
-        self.driver.find_element(By.ID,self.continue_button_id).click()
+        self.click_element("continue_button_id",self.continue_button_id)
+        # self.driver.find_element(By.ID,self.continue_button_id).click()
 
     def click_finish(self):
-        self.driver.find_element(By.ID,self.finish_button_id).click()
+        self.click_element("finish_button_id", self.finish_button_id)
+        # self.driver.find_element(By.ID,self.finish_button_id).click()
 
     def click_backhome(self):
-        self.driver.find_element(By.ID,self.backhome_button_id).click()
+        self.click_element("backhome_button_id", self.backhome_button_id)
+        # self.driver.find_element(By.ID,self.backhome_button_id).click()
 
     def home_app(self):
-        return self.driver.find_element(By.CLASS_NAME,self.home_coming_class).is_displayed()
+        return self.display_status("home_coming_class",self.home_coming_class)
+        # return self.driver.find_element(By.CLASS_NAME,self.home_coming_class).is_displayed()
 
     def enter_info_and_checkout(self,firstname,lastname,zipcode):
         self.enter_firstname(firstname)
