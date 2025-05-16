@@ -1,5 +1,8 @@
 from selenium.webdriver.common.by import By
 
+from pages.Homepage import HomePage
+
+
 class LoginPage:
 
     def __init__(self,driver):
@@ -24,6 +27,7 @@ class LoginPage:
 
     def click_login_button(self):
         self.driver.find_element(By.ID,self.login_button_id).click()
+        return HomePage(self.driver)
 
     def check_loggined(self):
         return self.driver.find_element(By.CLASS_NAME,self.validation_title_class).is_displayed()
@@ -33,4 +37,9 @@ class LoginPage:
 
     def empty_credentials_warning(self):
         return self.driver.find_element(By.XPATH,self.empty_credentials_warning_xpath).is_displayed()
+
+    def enter_details(self,username,password):
+        self.enter_username(username)
+        self.enter_password(password)
+
 
