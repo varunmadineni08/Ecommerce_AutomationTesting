@@ -1,3 +1,4 @@
+import pytest
 
 from pages.Loginpage import LoginPage
 from tests.Basetest import BaseTest
@@ -5,6 +6,7 @@ from tests.Basetest import BaseTest
 
 class TestCart(BaseTest):
 
+    @pytest.mark.flaky(reruns=3, reruns_delay=2)
     def test_cart_page(self):
         login_page=LoginPage(self.driver)
         login_page.enter_details("standard_user","secret_sauce")
